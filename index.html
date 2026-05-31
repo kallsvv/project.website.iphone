@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iSTORE - Toko Online iPhone Baru & Bekas Premium</title>
+  <meta name="description"
+    content="Temukan iPhone impian baru dan bekas berkualitas tinggi dengan transparansi kondisi fisik, battery health, IMEI, dan garansi lengkap hanya di iSTORE.">
+  <link rel="stylesheet" href="src/css/style.css">
+</head>
+
+<body>
+
+  <!-- Toast Notification Wrapper -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Header / Navigation Bar -->
+  <header>
+    <div class="container header-container">
+      <a href="#home" class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M12 20.94c1.88-1 3-2 4-3.5 1-1.5 1.5-2.5 1.5-4a6.5 6.5 0 0 0-11.5-4C6 9.44 6 10.44 6 13.44c0 1.5.5 2.5 1.5 4 1 1.5 2.12 2.5 4 3.5Z" />
+          <path d="M12 2c0 .5-.5 2-2.5 2.5" />
+        </svg>
+        iSTORE<span>.</span>
+      </a>
+
+      <!-- Main Navigation links -->
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#catalog">Katalog</a>
+        <a href="#about">Tentang Kami</a>
+        <a href="#how-to-buy">Cara Pembelian</a>
+        <a href="#warranty">Garansi</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Kontak</a>
+      </nav>
+
+      <!-- Action Items (Search, Theme, Cart, User) -->
+      <div class="nav-actions">
+        <!-- Search bar trigger (Simple premium input) -->
+        <div style="position: relative; display: flex; align-items: center;">
+          <input type="text" id="search-input" placeholder="Cari iPhone..." class="price-input"
+            style="width: 180px; padding-left: 36px; border-radius: 18px; height: 36px;">
+          <svg style="position: absolute; left: 12px; color: var(--text-secondary);" width="16" height="16"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </div>
+
+        <!-- Light / Dark Mode Toggle -->
+        <button id="theme-toggle" class="btn-icon" title="Ubah Tema">
+          <!-- Sun Icon (shown in dark mode) -->
+          <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <!-- Moon Icon (shown in light mode) -->
+          <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Shopping Cart Icon -->
+        <a href="#cart" class="btn-icon" title="Keranjang Belanja">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span id="cart-count-badge" class="cart-badge" style="display: none;">0</span>
+        </a>
+
+        <!-- User Menu Profile / Auth -->
+        <div class="user-menu" id="user-menu-root">
+          <button class="btn-icon" id="user-menu-btn" title="Akun Pengguna">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </button>
+          <div class="dropdown-menu" id="user-dropdown">
+            <!-- Dynamic dropdown items will be injected here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Dynamic Page Viewport -->
+  <main id="app-viewport" class="container view-fade-in" style="margin-top: 30px; margin-bottom: 60px; flex-grow: 1;">
+    <!-- Views will be dynamically loaded here by router -->
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">iSTORE<span>.</span></div>
+          <p class="footer-desc">Toko spesialis iPhone baru dan bekas berkualitas tinggi. Transparansi kondisi, IMEI
+            terdaftar, iCloud clean, dan garansi produk terjamin.</p>
+        </div>
+        <div>
+          <h4 class="footer-title">Katalog & Produk</h4>
+          <div class="footer-links">
+            <a href="#catalog?kondisi=Baru">iPhone Baru</a>
+            <a href="#catalog?kondisi=Bekas">iPhone Bekas / Second</a>
+            <a href="#catalog?grade=A">Bekas Grade A (Super Mulus)</a>
+            <a href="#catalog?grade=B">Bekas Grade B (Mulus Layak)</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Dukungan Pelanggan</h4>
+          <div class="footer-links">
+            <a href="#how-to-buy">Cara Pembelian</a>
+            <a href="#warranty">Ketentuan Garansi</a>
+            <a href="#returns">Kebijakan Pengembalian</a>
+            <a href="#faq">Pertanyaan Umum (FAQ)</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Hubungi Kami</h4>
+          <div class="footer-links">
+            <a href="#contact">Kontak Center</a>
+            <a href="#about">Tentang iSTORE</a>
+            <a href="mailto:support@istore.com">support@istore.com</a>
+            <span style="color: var(--text-secondary); font-size: 14px;">WhatsApp: 0812-3456-7890</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 iSTORE Indonesia. All rights reserved. Created with premium minimalist design.</p>
+        <p>Bebas IMEI Blokir &bull; Garansi Retur 100%</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AUTHENTICATION MODAL -->
+  <div id="auth-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" onclick="app.closeAuthModal()">&times;</button>
+
+      <!-- Login View -->
+      <div id="auth-view-login">
+        <h3 class="modal-title">Masuk ke iSTORE</h3>
+        <form id="login-form">
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" id="login-email" class="form-input" placeholder="contoh@domain.com" required
+              autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="display:flex; justify-content:space-between;">
+              Password
+              <a href="javascript:void(0)" onclick="app.switchAuthView('reset')"
+                style="color:var(--accent); text-decoration:none; font-size:12px; font-weight:normal;">Lupa
+                Password?</a>
+            </label>
+            <input type="password" id="login-password" class="form-input" placeholder="••••••••" required
+              autocomplete="current-password">
+          </div>
+          <button type="submit" class="btn-primary"
+            style="width: 100%; justify-content: center; margin-top: 10px;">Masuk Sekarang</button>
+        </form>
+        <p style="text-align: center; margin-top: 20px; font-size: 14px; color: var(--text-secondary);">
+          Belum punya akun? <a href="javascript:void(0)" onclick="app.switchAuthView('register')"
+            style="color: var(--accent); text-decoration: none; font-weight: 600;">Daftar di sini</a>
+        </p>
+      </div>
+
+      <!-- Register View -->
+      <div id="auth-view-register" style="display: none;">
+        <h3 class="modal-title">Daftar Akun Baru</h3>
+        <form id="register-form">
+          <div class="form-group">
+            <label class="form-label">Nama Lengkap</label>
+            <input type="text" id="register-name" class="form-input" placeholder="Budi Santoso" required
+              autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" id="register-email" class="form-input" placeholder="contoh@domain.com" required
+              autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" id="register-password" class="form-input" placeholder="Minimal 6 karakter" required
+              minlength="6" autocomplete="new-password">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Alamat Pengiriman</label>
+            <textarea id="register-address" class="form-textarea"
+              placeholder="Tuliskan alamat pengiriman lengkap Anda..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary"
+            style="width: 100%; justify-content: center; margin-top: 10px;">Daftar Akun</button>
+        </form>
+        <p style="text-align: center; margin-top: 20px; font-size: 14px; color: var(--text-secondary);">
+          Sudah punya akun? <a href="javascript:void(0)" onclick="app.switchAuthView('login')"
+            style="color: var(--accent); text-decoration: none; font-weight: 600;">Masuk di sini</a>
+        </p>
+      </div>
+
+      <!-- Reset Password View -->
+      <div id="auth-view-reset" style="display: none;">
+        <h3 class="modal-title">Reset Password</h3>
+        <form id="reset-form">
+          <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px; line-height: 1.5;">Masukkan
+            email akun Anda. Kami akan mensimulasikan penyetelan ulang kata sandi baru untuk akun Anda.</p>
+          <div class="form-group">
+            <label class="form-label">Email Terdaftar</label>
+            <input type="email" id="reset-email" class="form-input" placeholder="contoh@domain.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password Baru</label>
+            <input type="password" id="reset-new-password" class="form-input" placeholder="Masukkan password baru"
+              required minlength="6">
+          </div>
+          <button type="submit" class="btn-primary"
+            style="width: 100%; justify-content: center; margin-top: 10px;">Simpan Password Baru</button>
+        </form>
+        <p style="text-align: center; margin-top: 20px; font-size: 14px; color: var(--text-secondary);">
+          Kembali ke <a href="javascript:void(0)" onclick="app.switchAuthView('login')"
+            style="color: var(--accent); text-decoration: none; font-weight: 600;">Halaman Login</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN PRODUCT EDIT/ADD MODAL -->
+  <div id="admin-product-modal" class="modal-overlay">
+    <div class="modal-content" style="max-width: 650px; max-height: 90vh; overflow-y: auto;">
+      <button class="modal-close" onclick="app.closeAdminProductModal()">&times;</button>
+      <h3 class="modal-title" id="admin-product-modal-title">Tambah Produk iPhone</h3>
+      <form id="admin-product-form">
+        <input type="hidden" id="admin-prod-id">
+
+        <div class="form-group">
+          <label class="form-label">Nama Produk</label>
+          <input type="text" id="admin-prod-name" class="form-input" placeholder="iPhone 15 Pro 128GB - Baru" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="form-group">
+            <label class="form-label">Seri iPhone</label>
+            <select id="admin-prod-series" class="select-custom" style="width: 100%; height: 46px;" required>
+              <option value="iPhone 15">iPhone 15 Series</option>
+              <option value="iPhone 14">iPhone 14 Series</option>
+              <option value="iPhone 13">iPhone 13 Series</option>
+              <option value="iPhone 12">iPhone 12 Series</option>
+              <option value="iPhone 11">iPhone 11 Series</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kondisi Perangkat</label>
+            <select id="admin-prod-condition" class="select-custom" style="width: 100%; height: 46px;"
+              onchange="app.toggleAdminUsedSpecs(this.value)" required>
+              <option value="Baru">Baru</option>
+              <option value="Bekas">Bekas (Second)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+          <div class="form-group">
+            <label class="form-label">Harga (Rp)</label>
+            <input type="number" id="admin-prod-price" class="form-input" placeholder="Contoh: 15499000" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Penyimpanan / Storage</label>
+            <select id="admin-prod-storage" class="select-custom" style="width: 100%; height: 46px;" required>
+              <option value="64GB">64GB</option>
+              <option value="128GB">128GB</option>
+              <option value="256GB">256GB</option>
+              <option value="512GB">512GB</option>
+              <option value="1TB">1TB</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Warna</label>
+            <input type="text" id="admin-prod-color" class="form-input" placeholder="Midnight, Silver, dll" required>
+          </div>
+        </div>
+
+        <!-- Spec khusus bekas (conditionally styled/disabled by JS) -->
+        <div id="admin-used-specs-section"
+          style="border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; margin-bottom: 20px; background-color: var(--bg-primary);">
+          <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 12px; text-transform: uppercase;">Spesifikasi
+            Detail Kondisi Bekas</h4>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label class="form-label">Grade Fisik</label>
+              <select id="admin-prod-grade" class="select-custom" style="width: 100%; height: 46px;">
+                <option value="A">Grade A (95%-100%)</option>
+                <option value="B">Grade B (85%-94%)</option>
+                <option value="C">Grade C (75%-84%)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Battery Health (%)</label>
+              <input type="number" id="admin-prod-bh" class="form-input" placeholder="85" min="50" max="100">
+            </div>
+            <div class="form-group">
+              <label class="form-label">iCloud Status</label>
+              <select id="admin-prod-icloud" class="select-custom" style="width: 100%; height: 46px;">
+                <option value="Clean">Clean (Aman Bebas Reset)</option>
+                <option value="Locked">Locked / Bermasalah</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label class="form-label">Status Face ID</label>
+              <select id="admin-prod-faceid" class="select-custom" style="width: 100%; height: 46px;">
+                <option value="Normal">Normal / Lancar</option>
+                <option value="Tidak Aktif / Rusak">Tidak Aktif / Rusak</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Status True Tone</label>
+              <select id="admin-prod-truetone" class="select-custom" style="width: 100%; height: 46px;">
+                <option value="Normal">Normal</option>
+                <option value="Off / Rusak">Off / Rusak</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Kamera & Speaker</label>
+              <select id="admin-prod-camera-speaker" class="select-custom" style="width: 100%; height: 46px;">
+                <option value="Normal">Semua Normal</option>
+                <option value="Kamera Bermasalah">Kamera Bermasalah</option>
+                <option value="Speaker Bermasalah">Speaker Bermasalah</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label">Status IMEI</label>
+            <input type="text" id="admin-prod-imei" class="form-input" placeholder="Terdaftar Kemenperin (Sinyal On)">
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="form-group">
+            <label class="form-label">Stok Unit</label>
+            <input type="number" id="admin-prod-stock" class="form-input" placeholder="5" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Status Garansi</label>
+            <input type="text" id="admin-prod-warranty" class="form-input" placeholder="1 Tahun Resmi / 7 Hari Toko"
+              required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Kelengkapan Paket Penjualan</label>
+          <input type="text" id="admin-prod-package" class="form-input" placeholder="Box Original, Kabel Charger"
+            required>
+        </div>
+
+        <!-- Multi photo URLs input -->
+        <div class="form-group">
+          <label class="form-label">Upload Link Foto Produk (Pisahkan dengan baris baru)</label>
+          <textarea id="admin-prod-images" class="form-textarea"
+            placeholder="https://unsplash.com/...&#10;https://unsplash.com/..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Deskripsi Lengkap Produk</label>
+          <textarea id="admin-prod-desc" class="form-textarea" style="height: 120px;"
+            placeholder="Tulis rincian fisik, kelengkapan, garansi, dll." required></textarea>
+        </div>
+
+        <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px;">
+          <button type="button" class="btn-secondary" onclick="app.closeAdminProductModal()">Batal</button>
+          <button type="submit" class="btn-primary">Simpan Produk</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- INVOICE DETAILED VIEW MODAL -->
+  <div id="admin-invoice-modal" class="modal-overlay">
+    <div class="modal-content" style="max-width: 600px;">
+      <button class="modal-close" onclick="app.closeInvoiceModal()">&times;</button>
+      <div id="invoice-modal-body">
+        <!-- Rendered dynamic invoice will go here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Javascript Modules -->
+  <script src="src/js/database.js"></script>
+  <script src="src/js/app.js"></script>
+</body>
+
+</html>
